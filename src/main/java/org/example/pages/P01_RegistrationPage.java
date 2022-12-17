@@ -1,9 +1,9 @@
 package org.example.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.locators.RelativeLocator;
 import org.openqa.selenium.support.ui.Select;
 
 public class P01_RegistrationPage {
@@ -15,34 +15,34 @@ public class P01_RegistrationPage {
     }
 
     // registration tap
-    @FindBy(xpath = "//a[@class='ico-register']")
-    public WebElement registerTap;
+//    @FindBy(xpath = "//a[@class='ico-register']")
+    public By registerTap= RelativeLocator.with(By.xpath("//a[@class='ico-register']"));
 
     // user data
-    @FindBy(xpath = "(//input[@type='radio'])[1]")
-    private WebElement gender;
-    @FindBy(xpath = "//input[@name='FirstName']")
-    private WebElement firstName;
-    @FindBy(xpath = "//input[@name='LastName']")
-    private WebElement lastName;
-    @FindBy(xpath = "//a[@class='button-1 register-continue-button']")
-    public WebElement continueButton;
-    @FindBy(xpath = "//select[@name='DateOfBirthDay']")
-    private WebElement dayOfBirth;
-    @FindBy(xpath = "//select[@name='DateOfBirthMonth']")
-    private WebElement monthOfBirth;
-    @FindBy(xpath = "//select[@name='DateOfBirthYear']")
-    private WebElement yearOfBirth;
-    @FindBy(xpath = "//input[@type='email']")
-    private WebElement email;
-    @FindBy(xpath = "//input[@name='Company']")
-    private WebElement company;
-    @FindBy(xpath = "(//input[@type='password'])[1]")
-    private WebElement password;
-    @FindBy(xpath = "(//input[@type='password'])[2]")
-    private WebElement confirmPassword;
-    @FindBy(xpath = "(//button[@type='submit'])[2]")
-    private WebElement registerButton;
+//    @FindBy(xpath = "(//input[@type='radio'])[1]")
+    final private By gender=RelativeLocator.with(By.xpath("(//input[@type='radio'])[1]"));
+//    @FindBy(xpath = "//input[@name='FirstName']")
+    final private By firstName=RelativeLocator.with(By.xpath("//input[@name='FirstName']"));
+//    @FindBy(xpath = "//input[@name='LastName']")
+    final private By lastName=RelativeLocator.with(By.xpath("//input[@name='LastName']"));
+//    @FindBy(xpath = "//a[@class='button-1 register-continue-button']")
+    public By continueButton=RelativeLocator.with(By.xpath("//a[@class='button-1 register-continue-button']"));
+//    @FindBy(xpath = "//select[@name='DateOfBirthDay']")
+    final private By dayOfBirth=RelativeLocator.with(By.xpath("//select[@name='DateOfBirthDay']"));
+//    @FindBy(xpath = "//select[@name='DateOfBirthMonth']")
+    final private By monthOfBirth=RelativeLocator.with(By.xpath("//select[@name='DateOfBirthMonth']"));
+//    @FindBy(xpath = "//select[@name='DateOfBirthYear']")
+    final private By yearOfBirth=RelativeLocator.with(By.xpath("//select[@name='DateOfBirthYear']"));
+//    @FindBy(xpath = "//input[@type='email']")
+    final private By email=RelativeLocator.with(By.xpath("//input[@type='email']"));
+//    @FindBy(xpath = "//input[@name='Company']")
+    final private By company=RelativeLocator.with(By.xpath("//input[@name='Company']"));
+//    @FindBy(xpath = "(//input[@type='password'])[1]")
+    final private By password=RelativeLocator.with(By.xpath("(//input[@type='password'])[1]"));
+//    @FindBy(xpath = "(//input[@type='password'])[2]")
+    final private By confirmPassword=RelativeLocator.with(By.xpath("(//input[@type='password'])[2]"));
+//    @FindBy(xpath = "(//button[@type='submit'])[2]")
+    final private By registerButton=RelativeLocator.with(By.xpath("(//button[@type='submit'])[2]"));
 
     public void registerNewUser(
             String fname,
@@ -52,24 +52,24 @@ public class P01_RegistrationPage {
             String userPassword){
         // TODO: add new user
         // fill user data
-        gender.click();
-        firstName.sendKeys(fname);
-        lastName.sendKeys(lname);
+        driver.findElement(gender).click();
+        driver.findElement(firstName).sendKeys(fname);
+        driver.findElement(lastName).sendKeys(lname);
 
-        Select select=new Select(dayOfBirth);
+        Select select=new Select(driver.findElement(dayOfBirth));
         select.selectByIndex(1);
-        select=new Select(monthOfBirth);
+        select=new Select(driver.findElement(monthOfBirth));
         select.selectByIndex(1);
-        select=new Select(yearOfBirth);
+        select=new Select(driver.findElement(yearOfBirth));
         select.selectByIndex(1);
 
-        email.sendKeys(useerEmail);
-        company.sendKeys(companyName);
+        driver.findElement(email).sendKeys(useerEmail);
+        driver.findElement(company).sendKeys(companyName);
 
-        password.sendKeys(userPassword);
-        confirmPassword.sendKeys(userPassword);
+        driver.findElement(password).sendKeys(userPassword);
+        driver.findElement(confirmPassword).sendKeys(userPassword);
 
-        registerButton.click();
+        driver.findElement(registerButton).click();
     }
 
 }

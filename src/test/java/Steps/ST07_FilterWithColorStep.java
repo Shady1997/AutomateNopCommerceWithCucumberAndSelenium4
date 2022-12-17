@@ -16,14 +16,14 @@ import java.util.List;
 import static Steps.ST01_RegistrationStep.email;
 import static Steps.ST01_RegistrationStep.password;
 
-public class ST07_FilterWithColorStep extends TestBase{
+public class ST07_FilterWithColorStep extends Hooks {
 
     P02_LoginPage loginPage;
     P03_HomePage homePage;
     P04_ShoesPage shoesPage;
     @Given("user login to the application")
     public void userInLoginPage() {
-        prepareClassProperties("Chrome");
+        initialization("Chrome");
         startApplication();
     }
 
@@ -41,7 +41,7 @@ public class ST07_FilterWithColorStep extends TestBase{
 
     @Then("filtered results should appear correctly")
     public void filteredResultsShouldAppearCorrectly() {
-        List<WebElement> elements=shoesPage.getAddToCardButton();
+        List<WebElement> elements=driver.findElements(shoesPage.getAddToCardButton());
         Assert.assertNotEquals(elements.size(),0);
         tearDown();
     }

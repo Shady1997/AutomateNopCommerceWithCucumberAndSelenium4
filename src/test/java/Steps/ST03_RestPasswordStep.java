@@ -9,20 +9,20 @@ import org.testng.Assert;
 
 import static Steps.ST01_RegistrationStep.email;
 
-public class ST03_RestPasswordStep extends TestBase{
+public class ST03_RestPasswordStep extends Hooks {
 
     P02_LoginPage loginPage;
 
     @Given("user is in login page and forget password")
     public void userInLoginPage() {
-        prepareClassProperties("Chrome");
+        initialization("Chrome");
         startApplication();
     }
 
     @When("user choose forget password link and add his email")
     public void userChooseForgetPasswordLinkAndAddHisEmail() {
         loginPage=new P02_LoginPage(driver);
-        loginPage.loginTap.click();
+        driver.findElement(loginPage.loginTap).click();
         loginPage.setPassword(email);
     }
 

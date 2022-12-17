@@ -1,11 +1,10 @@
 package org.example.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.locators.RelativeLocator;
 
-import java.util.List;
 
 public class P05_NotebookPage {
     WebDriver driver;
@@ -13,21 +12,21 @@ public class P05_NotebookPage {
         this.driver=driver;
         PageFactory.initElements(driver, this);
     }
-    @FindBy(xpath = "//button[text()='Add to cart']")
-    private List<WebElement> addToCard;
-    @FindBy(xpath = "//button[text()='Add to wishlist']")
-    private List<WebElement> addToWhitList;
-    @FindBy(xpath = "//button[text()='Add to compare list']")
-    private List<WebElement> addToCompareList;
-    @FindBy(xpath = "//p[@class='content']")
-    private WebElement confirmationMessage;
-    @FindBy(xpath = "(//button[text()='Add to wishlist'])[1]")
-    private WebElement addWhiteListButton;
+//    @FindBy(xpath = "//button[text()='Add to cart']")
+    final private By addToCard= RelativeLocator.with(By.xpath("//button[text()='Add to cart']"));
+//    @FindBy(xpath = "//button[text()='Add to wishlist']")
+    final private By addToWhitList=RelativeLocator.with(By.xpath("//button[text()='Add to wishlist']"));
+//    @FindBy(xpath = "//button[text()='Add to compare list']")
+    final private By addToCompareList=RelativeLocator.with(By.xpath("//button[text()='Add to compare list']"));
+//    @FindBy(xpath = "//p[@class='content']")
+    final private By confirmationMessage=RelativeLocator.with(By.xpath("//p[@class='content']"));
+//    @FindBy(xpath = "(//button[text()='Add to wishlist'])[1]")
+    final private By addWhiteListButton=RelativeLocator.with(By.xpath("(//button[text()='Add to wishlist'])[1]"));
     public void clickAddToWhiteListButton(){
-        addWhiteListButton.click();
+        driver.findElement(addWhiteListButton).click();
     }
-    public String getConfirmationMessage(){return confirmationMessage.getText();}
-    public List<WebElement> getAddToCardButton(){return addToCard;}
-    public List<WebElement> getAddToWhitList(){return addToWhitList;}
-    public List<WebElement> getAddToCompareList(){return addToCompareList;}
+    public String getConfirmationMessage(){return driver.findElement(confirmationMessage).getText();}
+    public By getAddToCardButton(){return addToCard;}
+    public By getAddToWhitList(){return addToWhitList;}
+    public By getAddToCompareList(){return addToCompareList;}
 }

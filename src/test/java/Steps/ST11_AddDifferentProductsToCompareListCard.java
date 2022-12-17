@@ -10,14 +10,14 @@ import org.testng.Assert;
 import static Steps.ST01_RegistrationStep.email;
 import static Steps.ST01_RegistrationStep.password;
 
-public class ST11_AddDifferentProductsToCompareListCard extends TestBase{
+public class ST11_AddDifferentProductsToCompareListCard extends Hooks {
     P02_LoginPage loginPage;
     P03_HomePage homePage;
     P04_ShoesPage shoesPage;
     P05_NotebookPage notebookPage;
     @Given("user login Successfully")
     public void userInLoginPage() {
-        prepareClassProperties("Chrome");
+        initialization("Chrome");
         startApplication();
     }
 
@@ -29,16 +29,18 @@ public class ST11_AddDifferentProductsToCompareListCard extends TestBase{
         loginPage.login(email,password);
         PageBase.hoverWebElement(driver,homePage.ComputerProductsTap());
         homePage.selectComputerProduct();
-        notebookPage.getAddToCompareList().get(0).click();
+        driver.findElements(notebookPage.getAddToCompareList()).get(0).click();
+        Thread.sleep(3000);
         Assert.assertEquals(notebookPage.getConfirmationMessage(),"The product has been added to your product comparison");
     }
 
     @And("user add one product from Shoes in Apparel category to Compare List")
-    public void userAddOneProductFromShoesInApparelCategoryToShoppingCard() {
+    public void userAddOneProductFromShoesInApparelCategoryToShoppingCard() throws InterruptedException {
         shoesPage=new P04_ShoesPage(driver);
         PageBase.hoverWebElement(driver,homePage.apparelProductsTap());
         homePage.selectApparelProduct();
-        shoesPage.getAddToCompareList().get(0).click();
+        driver.findElements(shoesPage.getAddToCompareList()).get(0).click();
+        Thread.sleep(3000);
         Assert.assertEquals(shoesPage.getConfirmationMessage(),"The product has been added to your product comparison");
     }
 

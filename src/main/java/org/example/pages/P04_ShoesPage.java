@@ -1,9 +1,9 @@
 package org.example.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.locators.RelativeLocator;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -16,33 +16,33 @@ public class P04_ShoesPage {
     }
 
     // elements in shoes page
-    @FindBy(xpath = "(//span[@class='attribute-square'])[2]")
-    private WebElement redShoes;
+//    @FindBy(xpath = "(//span[@class='attribute-square'])[2]")
+    final private By redShoes=RelativeLocator.with(By.xpath("(//span[@class='attribute-square'])[2]"));
     public void filterShoes(){
-        redShoes.click();}
-    @FindBy(xpath = "//button[text()='Add to cart']")
-    private List<WebElement> addToCard;
-    @FindBy(xpath = "//button[text()='Add to wishlist']")
-    private List<WebElement> addToWhitList;
-    @FindBy(xpath = "//button[text()='Add to compare list']")
-    private List<WebElement> addToCompareList;
-    @FindBy(id = "product_attribute_9")
-    private WebElement shoesSize;
-    @FindBy(xpath = "//p[@class='content']")
-    private WebElement confirmationMessage;
-    @FindBy(xpath = "(//button[text()='Add to wishlist'])[1]")
-    private WebElement addWhiteListButton;
+        driver.findElement(redShoes).click();}
+//    @FindBy(xpath = "//button[text()='Add to cart']")
+    final private By addToCard=RelativeLocator.with(By.xpath("//button[text()='Add to cart']"));
+//    @FindBy(xpath = "//button[text()='Add to wishlist']")
+    final private By addToWhitList=RelativeLocator.with(By.xpath("//button[text()='Add to wishlist']"));
+//    @FindBy(xpath = "//button[text()='Add to compare list']")
+    final private By addToCompareList=RelativeLocator.with(By.xpath("//button[text()='Add to compare list']"));
+//    @FindBy(id = "product_attribute_9")
+    final private By shoesSize=RelativeLocator.with(By.xpath("//select[@id='product_attribute_9']"));
+//    @FindBy(xpath = "//p[@class='content']")
+    final private By confirmationMessage=RelativeLocator.with(By.xpath("//p[@class='content']"));
+//    @FindBy(xpath = "(//button[text()='Add to wishlist'])[1]")
+    final private By addWhiteListButton=RelativeLocator.with(By.xpath("(//button[text()='Add to wishlist'])[1]"));
     public void clickAddToWhiteListButton(){
-        addWhiteListButton.click();
+        driver.findElement(addWhiteListButton).click();
     }
     public String getConfirmationMessage(){
-        return confirmationMessage.getText();
+        return driver.findElement(confirmationMessage).getText();
     }
-    public List<WebElement> getAddToCardButton(){return addToCard;}
-    public List<WebElement> getAddToWhitList(){return addToWhitList;}
-    public List<WebElement> getAddToCompareList(){return addToCompareList;}
+    public By getAddToCardButton(){return addToCard;}
+    public By getAddToWhitList(){return addToWhitList;}
+    public By getAddToCompareList(){return addToCompareList;}
     public void selectShoesSize(){
-        Select select=new Select(shoesSize);
+        Select select=new Select(driver.findElement(shoesSize));
         select.selectByIndex(1);
     }
 }

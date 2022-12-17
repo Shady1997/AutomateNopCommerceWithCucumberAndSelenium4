@@ -5,26 +5,25 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.example.pages.P01_RegistrationPage;
 import org.example.pages.PageBase;
+import org.testng.Assert;
 
-public class ST01_RegistrationStep extends TestBase{
+public class ST01_RegistrationStep extends Hooks {
 
     P01_RegistrationPage registrationPage;
     public static String email;
     public static String password;
     @Given("user is in main page")
     public void userInMainPage() {
-        prepareClassProperties("Chrome");
+        initialization("Chrome");
         startApplication();
     }
 
     @When("user choose register tap")
     public void userChooseRegisterTap() {
         registrationPage=new P01_RegistrationPage(driver);
-        registrationPage.registerTap.click();
+        driver.findElement(registrationPage.registerTap).click();
     }
 
     @And("fill all data and click register button")
@@ -42,7 +41,7 @@ public class ST01_RegistrationStep extends TestBase{
     @Then("user navigate to user page")
     public void userNavigateToHomePage() {
         Assert.assertTrue(driver.getPageSource().contains("Your registration completed"));
-        registrationPage.continueButton.click();
+        driver.findElement(registrationPage.continueButton).click();
         Assert.assertTrue(driver.getPageSource().contains("Welcome to our store"));
         // extend report status
         test.log(LogStatus.PASS, "Register Successfully to Application");
