@@ -5,6 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.pages.*;
 import org.junit.Assert;
+import org.openqa.selenium.devtools.v85.page.Page;
+
+import java.io.IOException;
 
 import static Steps.ST01_RegistrationStep.email;
 import static Steps.ST01_RegistrationStep.password;
@@ -21,7 +24,7 @@ public class ST12_CreateSuccessfulOrder extends Hooks {
     }
 
     @When("user click go to card button and complete checkout")
-    public void userClickGoToCardButtonAndCompleteCheckout() {
+    public void userClickGoToCardButtonAndCompleteCheckout() throws InterruptedException {
         loginPage=new P02_LoginPage(driver);
         homePage=new P03_HomePage(driver);
         checkOutPage=new P06_CheckOutPage(driver);
@@ -30,10 +33,26 @@ public class ST12_CreateSuccessfulOrder extends Hooks {
         homePage.clickGoToCardButton();
         checkOutPage.checkTermsOfService();
         checkOutPage.ClickCheckoutButton();
+        // fill billing address form
+        checkOutPage.fillBillingAddress();
+        Thread.sleep(2000);
+        // choose shipping method
+        checkOutPage.chooseShippingMethod();
+        Thread.sleep(2000);
+        // choose payment method
+        checkOutPage.choosePaymentMethod();
+        Thread.sleep(2000);
+        // fill payment information
+        checkOutPage.fillPaymentInformation();
+        Thread.sleep(2000);
+        // complete payment
+        checkOutPage.confirmPayment();
     }
 
     @Then("order should created successfully")
-    public void orderShouldCreatedSuccessfully() {
-        Assert.assertTrue(true);
+    public void orderShouldCreatedSuccessfully() throws IOException {
+        homePage.logout();
+        tearDown();
+        PageBase.startHtmlReport(System.getProperty("user.dir")+"/target/HtmlReports","report.html");
     }
 }

@@ -45,6 +45,7 @@ public class P03_HomePage {
     final private By wishList=RelativeLocator.with(By.xpath("//span[@class='wishlist-qty']"));
 //    @FindBy(xpath = "//button[text()='Go to cart']")
     final private By goToCardButton=RelativeLocator.with(By.xpath("//button[text()='Go to cart']"));
+    final private By logout=RelativeLocator.with(By.xpath("//a[text()='Log out']"));
     public void clickGoToCardButton(){driver.findElement(goToCardButton).click();}
     public WebElement getShoppingCard(){return driver.findElement(shoppingCard);}
     public String getWhiteListAmount(){return driver.findElement(wishList).getText();}
@@ -76,6 +77,7 @@ public class P03_HomePage {
         driver.findElement(searchBox).sendKeys("MacBook");
         driver.findElement(searchButton).click();
     }
+    public void logout(){driver.findElement(logout).click();}
     public boolean checkSearchResult(){
        return driver.findElement(searchResult).getText().equals("Add to cart");
     }
