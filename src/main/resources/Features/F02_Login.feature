@@ -2,11 +2,19 @@
 @SmokeScnario
 Feature: Feature to test login functionality to Nop Commerce web application
 
-  @SmokeTest
-  Scenario: SC2- User could log in with valid email and password
+  Background:
     Given   user is in login page
-    When    user add valid username and password and click login button
+
+  @SmokeTest
+  Scenario: SC01- User could log in with valid email and password
+    When    user add valid "username" and "password" and click login button
     Then    user navigate to home page
+
+  @SmokeTest
+  Scenario: SC02- User could log in with invalid email and password
+    When    user add valid "username" and "password" and click login button
+    Then    user navigate to home page
+
 #    And     user add invalid username and password
 #            | standard_user1   | secret_sauce |
 #    Then    user will not navigate to home page

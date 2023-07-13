@@ -22,12 +22,12 @@ public class ST02_LoginStep extends Hooks {
 		startApplication();
 	}
 
-	@When("user add valid username and password and click login button")
-	public void user_add_valid_username_and_password() {
+	@When("^user add valid \"(.*)\" and \"(.*)\" and click login button$")
+	public void user_add_valid_username_and_password(String username, String pass) {
 
 		loginPage = new P02_LoginPage(driver);
 		PageBase.scrollWithSpecificSize(driver,0,300);
-		loginPage.login(email,password);
+		loginPage.login(username,pass);
 	}
 
 	@Then("user navigate to home page")
